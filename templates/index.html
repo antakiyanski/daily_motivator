@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Motivator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Kunlik Reja</h1>
+        <p class="quote"><i>"{{ quote }}"</i></p>
+
+        <form action="/add" method="POST">
+            <input type="text" name="title" placeholder="Yangi vazifa..." required>
+            <button type="submit">Qo'shish</button>
+        </form>
+
+        <div class="todo-container">
+            {% for todo in todo_list %}
+            <div class="todo-item">
+                <span class="{% if todo.complete %}completed{% endif %}">{{ todo.title }}</span>
+                <div>
+                    <a href="/update/{{ todo.id }}" class="btn-done">✓</a>
+                    <a href="/delete/{{ todo.id }}" class="btn-del">✗</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
